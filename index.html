@@ -108,6 +108,11 @@
       transform: translateY(-2px);
     }
 
+    /* 02 分析方法：三卡并排时向两侧拉宽，减少挤压感（窄屏自动还原） */
+    @media (min-width: 1240px) {
+      #method { margin-left: -80px; margin-right: -80px; }
+    }
+
     .toc a b { font-size: 12px; color: var(--cyan); font-weight: 700; }
 
     .container { max-width: 1080px; margin: 0 auto; padding: 20px 24px 80px; }
