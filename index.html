@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>市场洞察报告 · 作品集</title>
+  <meta name="description" content="FastMoss 调研数据 × AI 分析：美区 / 墨区 / 巴西三个市场口腔与保健类目的整体市场报告，六份成套交付，含月榜×周榜交叉验证方法论" />
+  <style>
+    :root {
+      --bg: #030712;
+      --bg-card: rgba(17, 24, 39, 0.7);
+      --border: rgba(56, 189, 248, 0.2);
+      --cyan: #22d3ee;
+      --blue: #3b82f6;
+      --violet: #8b5cf6;
+      --green: #10b981;
+      --text: #f3f4f6;
+      --text-dim: #94a3b8;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .bg-grid {
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(34, 211, 238, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(34, 211, 238, 0.05) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(circle at 50% 0%, black, transparent 80%);
+      -webkit-mask-image: radial-gradient(circle at 50% 0%, black, transparent 80%);
+      z-index: -2;
+      pointer-events: none;
+    }
+
+    .bg-glow {
+      position: fixed;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(139, 92, 246, 0.16), transparent 60%);
+      top: -200px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: -1;
+      filter: blur(60px);
+      pointer-events: none;
+    }
+
+    header { text-align: center; padding: 72px 20px 40px; }
+
+    header h1 {
+      font-size: 42px;
+      font-weight: 800;
+      margin: 0 0 12px;
+      background: linear-gradient(135deg, var(--cyan), var(--blue), var(--violet));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: -1px;
+    }
+
+    header p {
+      font-size: 18px;
+      color: var(--text-dim);
+      margin: 0 auto;
+      max-width: 720px;
+    }
+
+    .toc {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 24px 8px;
+    }
+
+    .toc a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 18px;
+      border-radius: 999px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: 14px;
+      transition: all 0.25s ease;
+    }
+
+    .toc a:hover {
+      color: var(--text);
+      border-color: var(--cyan);
+      box-shadow: 0 0 18px rgba(34, 211, 238, 0.18);
+      transform: translateY(-2px);
+    }
+
+    .toc a b { font-size: 12px; color: var(--cyan); font-weight: 700; }
+
+    .container { max-width: 1080px; margin: 0 auto; padding: 20px 24px 80px; }
+
+    .case { margin-bottom: 76px; scroll-margin-top: 24px; }
+    .case-head { text-align: center; margin-bottom: 34px; }
+
+    .case-index {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: rgba(139, 92, 246, 0.12);
+      border: 1px solid rgba(139, 92, 246, 0.35);
+      color: #c4b5fd;
+      margin-bottom: 14px;
+    }
+
+    .case-head h2 {
+      font-size: 30px;
+      font-weight: 800;
+      margin: 0 0 8px;
+      letter-spacing: -0.5px;
+    }
+
+    .case-head p { margin: 0 auto; color: var(--text-dim); font-size: 15px; max-width: 640px; }
+
+    .pipeline {
+      display: flex;
+      align-items: stretch;
+      justify-content: space-between;
+      gap: 16px;
+      margin: 0 0 48px;
+      position: relative;
+    }
+
+    .pipeline::before {
+      content: "";
+      position: absolute;
+      top: 36px;
+      left: 10%;
+      right: 10%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--cyan), var(--blue), var(--violet), transparent);
+      z-index: 0;
+      opacity: 0.6;
+    }
+
+    .node { flex: 1; min-width: 0; position: relative; z-index: 1; text-align: center; }
+
+    .node-icon {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      margin: 0 auto 16px;
+      display: grid;
+      place-items: center;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      box-shadow: 0 0 24px rgba(139, 92, 246, 0.15);
+      font-size: 28px;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .node:hover .node-icon { transform: scale(1.08); box-shadow: 0 0 32px rgba(139, 92, 246, 0.35); }
+
+    .node-title { font-weight: 700; font-size: 16px; margin-bottom: 6px; color: var(--text); }
+    .node-desc { font-size: 13px; color: var(--text-dim); padding: 0 8px; }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 28px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 24px 56px rgba(139, 92, 246, 0.14);
+      border-color: rgba(139, 92, 246, 0.4);
+    }
+
+    .card::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--cyan), var(--violet));
+      opacity: 0.7;
+    }
+
+    .card-header { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
+
+    .card-badge {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      background: rgba(139, 92, 246, 0.12);
+      border: 1px solid rgba(139, 92, 246, 0.35);
+      font-size: 17px;
+      font-weight: 700;
+      color: #c4b5fd;
+      flex-shrink: 0;
+    }
+
+    .card h3 { margin: 0; font-size: 20px; font-weight: 700; }
+    .card p.sub { margin: 4px 0 0; color: var(--text-dim); font-size: 14px; }
+
+    .card ul { margin: 16px 0 0; padding-left: 18px; color: var(--text-dim); font-size: 14px; }
+    .card li { margin-bottom: 8px; }
+    .card li strong { color: var(--text); font-weight: 600; }
+
+    .screenshot {
+      margin-top: 20px;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: rgba(0,0,0,0.3);
+    }
+
+    .screenshot img { width: 100%; display: block; transition: transform 0.35s ease; }
+    .card:hover .screenshot img { transform: scale(1.02); }
+
+    /* 竖长截图：限高裁切预览 */
+    .screenshot.tall img {
+      max-height: 520px;
+      object-fit: cover;
+      object-position: top;
+    }
+
+    /* 结论高亮条 */
+    .finding {
+      margin-top: 20px;
+      padding: 16px 20px;
+      border-radius: 12px;
+      background: rgba(16, 185, 129, 0.07);
+      border: 1px solid rgba(16, 185, 129, 0.28);
+      border-left: 3px solid var(--green);
+      font-size: 14px;
+      color: var(--text-dim);
+    }
+    .finding strong { color: var(--green); }
+
+    /* 数字带 */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      margin: 0 0 40px;
+    }
+    .stat {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      text-align: center;
+    }
+    .stat b { display: block; font-size: 26px; font-weight: 800; color: var(--cyan); letter-spacing: -0.5px; }
+    .stat span { font-size: 12.5px; color: var(--text-dim); }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 5px 12px;
+      border-radius: 999px;
+      background: rgba(16, 185, 129, 0.12);
+      color: var(--green);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      margin-top: 16px;
+    }
+
+    .status-pill::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 8px var(--green);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.2); }
+    }
+
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(139,92,246,0.25), transparent);
+      margin: 0 0 64px;
+      border: 0;
+    }
+
+    .notes {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .note {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 22px 24px;
+      font-size: 14px;
+      color: var(--text-dim);
+    }
+
+    .note h4 { margin: 0 0 8px; font-size: 15px; color: var(--text); }
+    .note .tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: var(--cyan);
+      margin-bottom: 6px;
+    }
+
+    @media (max-width: 760px) {
+      header h1 { font-size: 30px; }
+      .case-head h2 { font-size: 24px; }
+      .pipeline { flex-direction: column; gap: 30px; }
+      .pipeline::before { display: none; }
+      .cards { grid-template-columns: 1fr; }
+      .toc { display: none; }
+    }
+
+    footer { text-align: center; padding: 40px 20px; color: var(--text-dim); font-size: 13px; }
+  </style>
+</head>
+<body>
+  <div class="bg-grid"></div>
+  <div class="bg-glow"></div>
+
+  <header>
+    <h1>市场洞察报告</h1>
+    <p>FastMoss 调研数据 × AI 分析：美区 / 墨区 / 巴西三个市场的口腔与保健类目整体报告，六份成套交付 —— 从导出双榜到拿到结论，一次跑通一个市场</p>
+  </header>
+
+  <nav class="toc">
+    <a href="#report"><b>01</b>报告全貌</a>
+    <a href="#method"><b>02</b>分析方法</a>
+    <a href="#multi"><b>03</b>六份成套</a>
+  </nav>
+
+  <div class="container">
+
+    <!-- 总览 -->
+    <section class="case" id="overview">
+      <div class="case-head">
+        <div class="case-index">产品概览</div>
+        <h2>从一份销量榜到一份能拍板的市场报告</h2>
+        <p>以巴西口腔护理（2026 年 7 月）为例：500 个 SKU 的双榜数据，产出一部十个板块、带交叉验证的分析报告</p>
+      </div>
+
+      <div class="pipeline">
+        <div class="node">
+          <div class="node-icon">🔎</div>
+          <div class="node-title">锁定类目</div>
+          <div class="node-desc">FastMoss 按国家 / 类目筛选</div>
+        </div>
+        <div class="node">
+          <div class="node-icon">📋</div>
+          <div class="node-title">导出双榜</div>
+          <div class="node-desc">月榜 + 周榜各 500 SKU</div>
+        </div>
+        <div class="node">
+          <div class="node-icon">🤖</div>
+          <div class="node-title">AI 分析</div>
+          <div class="node-desc">结构 · 定价 · 竞品 · 趋势</div>
+        </div>
+        <div class="node">
+          <div class="node-icon">🧾</div>
+          <div class="node-title">生成报告</div>
+          <div class="node-desc">十个板块的可视化网页</div>
+        </div>
+        <div class="node">
+          <div class="node-icon">🎯</div>
+          <div class="node-title">结论交付</div>
+          <div class="node-desc">选品建议直接可用</div>
+        </div>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><b>319,187</b><span>7月总销量（件）</span></div>
+        <div class="stat"><b>R$6,796,544</b><span>7月总销售额</span></div>
+        <div class="stat"><b>298 / 500</b><span>双榜重叠 SKU</span></div>
+        <div class="stat"><b>64.4%</b><span>商品销量环比上升</span></div>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- 01 报告全貌 -->
+    <section class="case" id="report">
+      <div class="case-head">
+        <div class="case-index">01 · 报告全貌</div>
+        <h2>十个板块，从市场格局一路推到选品建议</h2>
+        <p>不是数据罗列 —— 每个板块都以「结构结论」收尾，读的人不需要自己再算</p>
+      </div>
+
+      <div class="cards">
+        <article class="card">
+          <div class="card-header">
+            <div class="card-badge">1</div>
+            <div>
+              <h3>开篇即市场画像</h3>
+              <p class="sub">四个核心数字 + 研判口径，30 秒读懂大盘</p>
+            </div>
+          </div>
+          <ul>
+            <li><strong>总量画像：</strong>总销量、总销售额、价格中位数、双榜重叠率四个数字开局</li>
+            <li><strong>口径透明：</strong>「月榜看单月规模、周榜看一周口径，钢模不同」—— 分析前提先写清楚</li>
+            <li><strong>店铺集中度：</strong>TOYACORP 20.7% + TOYA ORALCARE 18.1%，Top 10 店铺贡献 66.8% 销量，头部集中但长尾仍在</li>
+          </ul>
+          <span class="status-pill">数据来源已标注</span>
+          <div class="screenshot">
+            <img src="images/report_head.png" alt="报告开篇：核心数字与店铺集中度" />
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-header">
+            <div class="card-badge">2</div>
+            <div>
+              <h3>全页长图看结构</h3>
+              <p class="sub">十个板块一屏纵览</p>
+            </div>
+          </div>
+          <ul>
+            <li><strong>板块编排：</strong>市场格局 → 分类结构 → 产品类型 → 成分卖点 → 定价区间 → 头部产品 → 高潜单品 → 榜单交叉 → 外部验证 → 选品建议</li>
+            <li><strong>可视化优先：</strong>占比条形图、明细表、环比涨跌三色标，数字自己会说话</li>
+            <li><strong>外部交叉：</strong>第九板块引入第三方市场规模与增速，避免只用平台内数据自说自话</li>
+          </ul>
+          <span class="status-pill">HTML 报告 · 可直接浏览</span>
+          <div class="screenshot tall">
+            <img src="images/report_full.jpg" alt="报告全页长图" />
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- 02 分析方法 -->
+    <section class="case" id="method">
+      <div class="case-head">
+        <div class="case-index">02 · 分析方法</div>
+        <h2>结论怎么来的：三条互相咬合的证据链</h2>
+        <p>结构分析给出「哪里有机会」，交叉验证给出「谁在涨」，每个判断都能回溯到榜单原始行</p>
+      </div>
+
+      <div class="cards">
+        <article class="card">
+          <div class="card-header">
+            <div class="card-badge">3</div>
+            <div>
+              <h3>分类结构 → 找洼地</h3>
+              <p class="sub">把 500 个 SKU 拆到 13 个平台分类里看</p>
+            </div>
+          </div>
+          <ul>
+            <li><strong>销量 / SKU 双口径：</strong>手动牙刷销量占 30.5%（128 个 SKU 平价走量）；牙膏仅 71 个 SKU 却贡献 22.6% 销量，集中度高于牙刷</li>
+            <li><strong>功能拿捏卖点：</strong>羟基磷灰石、益生菌、紫管美白是溢价关键词</li>
+            <li><strong>长尾识别：</strong>牙齿矫正 13.4% 销量成高坪效小众类目，舌苔清洁等长尾自群坪效偏低</li>
+          </ul>
+          <div class="finding"><strong>结构结论：</strong>平价走量带在手动牙刷，溢价机会在牙膏美白与成分升级 —— 下一步投什么，结构先告诉你</div>
+          <div class="screenshot">
+            <img src="images/report_categories.png" alt="分类销量分布与 SKU 结构" />
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-header">
+            <div class="card-badge">4</div>
+            <div>
+              <h3>头部 Top10 → 看对手</h3>
+              <p class="sub">月榜 × 周榜两份 Top10 并排，谁稳谁猛一目了然</p>
+            </div>
+          </div>
+          <ul>
+            <li><strong>商品级明细：</strong>价格、销量、环比、分类逐行可查，商品 ID 对应平台唯一码</li>
+            <li><strong>月榜头部：</strong>CEELIKE 美白贴 + TOYA 系牙膏牙刷霸榜</li>
+            <li><strong>环比信号：</strong>+323%、+510% 的涨幅直接标红 —— 涨得快的不是头部，是这些</li>
+          </ul>
+          <div class="screenshot">
+            <img src="images/report_top10.png" alt="7月榜 Top 10 明细" />
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-header">
+            <div class="card-badge">5</div>
+            <div>
+              <h3>月榜 × 周榜交叉 → 抓趋势</h3>
+              <p class="sub">两份榜单做 SKU 级交集，把「爆发」和「波动」分开</p>
+            </div>
+          </div>
+          <ul>
+            <li><strong>四格透视：</strong>双榜重叠 298（占月榜 59.6%，头部基本稳定）、仅月榜 202（周环比走弱的流量池）、仅周榜 202（新进产品，含量爆发方向）、榜单换手率 40.4%</li>
+            <li><strong>高潜单品：</strong>周环比 ≥ +100% 且周销 ≥ 20 才入选，+2500% 的三维牙刷、+1300% 的舌苔清洁器都在此列</li>
+            <li><strong>增量方向：</strong>鼻腔+口腔综合护理需求显现（NITEX 鼻棒 +12,700%），巴西消费者对便携护理的需求在扩大</li>
+          </ul>
+          <div class="finding"><strong>环境结论：</strong>市场整体在放量 —— 64.4% 商品环比上升；高潜集中在益生菌牙膏与美白贴，Sopami SP7 以 +15,085% 从零爆款登顶</div>
+          <div class="screenshot">
+            <img src="images/report_cross.png" alt="月榜×周榜交叉与榜单变动" />
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- 03 六份成套 -->
+    <section class="case" id="multi">
+      <div class="case-head">
+        <div class="case-index">03 · 六份成套</div>
+        <h2>同一套方法，三个市场 × 两个类目</h2>
+        <p>美区 / 墨区 / 巴西 × 口腔 / 保健，流程跑通一个市场后，其余五个只是换数据</p>
+      </div>
+
+      <div class="cards">
+        <article class="card">
+          <div class="card-header">
+            <div class="card-badge">6</div>
+            <div>
+              <h3>六份报告封面</h3>
+              <p class="sub">同一版式，不同市场</p>
+            </div>
+          </div>
+          <span class="status-pill">成套交付</span>
+          <div class="screenshot">
+            <img src="images/covers_grid.jpg" alt="六份报告封面拼图" />
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-header">
+            <div class="card-badge">7</div>
+            <div>
+              <h3>调研底表清单</h3>
+              <p class="sub">每份报告背后是可回溯的原始榜单</p>
+            </div>
+          </div>
+          <ul>
+            <li><strong>底表先行：</strong>FastMoss 按国家 / 类目 / 榜单类型逐份导出，报告里每个数字都能对回底表</li>
+            <li><strong>模板复用：</strong>首份报告打磨完结构和口径后，其余市场按同一模板生成，对比时口径一致</li>
+          </ul>
+          <span class="status-pill">数据可回溯</span>
+          <div class="screenshot">
+            <img src="images/research_list.png" alt="FastMoss 调研表格清单" />
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- 工程底座 -->
+    <section class="case" id="notes">
+      <div class="case-head">
+        <div class="case-index">工作流要点</div>
+        <h2>让报告「可复用」而不是「一次性」</h2>
+        <p>这一套流水线跑完一个市场后，换市场的边际成本只有导数据</p>
+      </div>
+
+      <div class="notes">
+        <div class="note">
+          <div class="tag">口径</div>
+          <h4>月榜 / 周榜分开算账</h4>
+          <p>月榜看单月规模，周榜看一周口径，两份榜单钢模不同、趋势判断以各自的销量环比为准 —— 口径混用是大忌，报告开篇就把规则写死。</p>
+        </div>
+        <div class="note">
+          <div class="tag">验证</div>
+          <h4>每个结论带证据</h4>
+          <p>「结构结论」「环境结论」都是先给判断、紧跟数据：市占率百分比、环比涨幅、SKU 数量全部可回溯到底表原始行，不接受「AI 觉得」。</p>
+        </div>
+        <div class="note">
+          <div class="tag">复用</div>
+          <h4>模板一次打磨，六份输出</h4>
+          <p>首份巴西口腔报告确定十板块结构和结论样式后，其余市场按同一模板生成 —— 跨市场对比时口径天然一致，这份一致性本身就是分析价值。</p>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <footer>
+    锁定类目 → 导出双榜 → AI 分析 → 生成报告 → 结论交付 —— 每个市场的数据都可回溯
+  </footer>
+</body>
+</html>
