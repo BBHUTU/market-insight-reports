@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>市场洞察报告 · 作品集</title>
-  <meta name="description" content="FastMoss 调研数据 × AI 分析：美区 / 墨区 / 巴西三个市场口腔与保健类目的整体市场报告，六份成套交付，含月榜×周榜交叉验证方法论" />
+  <meta name="description" content="FastMoss 调研数据 × AI 分析：每月分析美 / 墨 / 巴西三国口腔与保健类目销量榜，叠加最新一周产品动态交叉验证；同一流程可复用到不同市场、类目与时间维度，已产出六份成套报告" />
   <style>
     :root {
       --bg: #030712;
@@ -309,6 +309,10 @@
       animation: pulse 2s infinite;
     }
 
+    /* 状态胶囊同时作为跳转链接（完整报告入口） */
+    a.status-pill { text-decoration: none; cursor: pointer; }
+    a.status-pill:hover { border-color: var(--green); box-shadow: 0 0 16px rgba(16,185,129,.3); }
+
     @keyframes pulse {
       0%, 100% { opacity: 1; transform: scale(1); }
       50% { opacity: 0.5; transform: scale(1.2); }
@@ -364,13 +368,13 @@
 
   <header>
     <h1>市场洞察报告</h1>
-    <p>FastMoss 调研数据 × AI 分析：美区 / 墨区 / 巴西三个市场的口腔与保健类目整体报告，六份成套交付 —— 从导出双榜到拿到结论，一次跑通一个市场</p>
+    <p>FastMoss 调研数据 × AI 分析：每月分析美、墨、巴西三国口腔与保健类目销量榜，叠加最新一周产品动态做交叉验证 —— 同一流程可复用到不同市场、类目与时间维度，已产出六份成套报告</p>
   </header>
 
   <nav class="toc">
     <a href="#report"><b>01</b>报告全貌</a>
     <a href="#method"><b>02</b>分析方法</a>
-    <a href="#multi"><b>03</b>六份成套</a>
+    <a href="#multi"><b>03</b>可复用流程</a>
   </nav>
 
   <div class="container">
@@ -379,8 +383,8 @@
     <section class="case" id="overview">
       <div class="case-head">
         <div class="case-index">产品概览</div>
-        <h2>从一份销量榜到一份能拍板的市场报告</h2>
-        <p>以巴西口腔护理（2026 年 7 月）为例：500 个 SKU 的双榜数据，产出一部十个板块、带交叉验证的分析报告</p>
+        <h2>把重复性调研交给 AI 工作流</h2>
+        <p>根据团队的业务方向和新品开发需求，需要时刻关注市场产品动态与素材方向变化 —— 每月用 FastMoss 分析美、巴、墨三国口腔与保健类目的销量排行榜数据，再叠加最新一周的产品动态做交叉分析</p>
       </div>
 
       <div class="pipeline">
@@ -411,11 +415,22 @@
         </div>
       </div>
 
-      <div class="stats">
-        <div class="stat"><b>319,187</b><span>7月总销量（件）</span></div>
-        <div class="stat"><b>R$6,796,544</b><span>7月总销售额</span></div>
-        <div class="stat"><b>298 / 500</b><span>双榜重叠 SKU</span></div>
-        <div class="stat"><b>64.4%</b><span>商品销量环比上升</span></div>
+      <div class="notes">
+        <div class="note">
+          <div class="tag">初衷</div>
+          <h4>减少重复性调研，去掉主观臆断</h4>
+          <p>产品动态的信息整合耗时且重复性强 —— 导榜、读数、逐条对比、写结论，这些交给 AI 工作流自动完成，人只负责把关结论，极大减少人力成本和「凭感觉判断」。</p>
+        </div>
+        <div class="note">
+          <div class="tag">长线</div>
+          <h4>有基础数据，就能看长线趋势</h4>
+          <p>同样的底表数据可对相邻月份、季度做长线市场分析 —— 市场在涨还是跌、季节性在哪、新品窗口期多长，靠时间维度一点点拼出来。</p>
+        </div>
+        <div class="note">
+          <div class="tag">内容</div>
+          <h4>主要分析什么</h4>
+          <p>市场画像（总量、价格带、店铺集中度）、爆款分析（高潜单品与增量方向）、竞品头部拆解，并抓取最新行业新闻做交叉验证 —— 同一套模板可复用到多个市场和类目。</p>
+        </div>
       </div>
     </section>
 
@@ -453,18 +468,22 @@
           <div class="card-header">
             <div class="card-badge">2</div>
             <div>
-              <h3>全页长图看结构</h3>
-              <p class="sub">十个板块一屏纵览</p>
+              <h3>板块拆开看：报告怎么讲</h3>
+              <p class="sub">完整 HTML 报告可点击底部按钮直接浏览</p>
             </div>
           </div>
           <ul>
             <li><strong>板块编排：</strong>市场格局 → 分类结构 → 产品类型 → 成分卖点 → 定价区间 → 头部产品 → 高潜单品 → 榜单交叉 → 外部验证 → 选品建议</li>
-            <li><strong>可视化优先：</strong>占比条形图、明细表、环比涨跌三色标，数字自己会说话</li>
+            <li><strong>定价区间：</strong>R$10–20 是走量甜点区（52.7% 销量），R$20–40 占 32.5% —— 价位带决定打法</li>
+            <li><strong>爆款分析：</strong>周环比 ≥ +100% 且周销 ≥ 20 才入选高潜榜，Sopami SP7 益生菌牙膏以 +15,085% 从零登顶</li>
             <li><strong>外部交叉：</strong>第九板块引入第三方市场规模与增速，避免只用平台内数据自说自话</li>
           </ul>
-          <span class="status-pill">HTML 报告 · 可直接浏览</span>
-          <div class="screenshot tall">
-            <img src="images/report_full.jpg" alt="报告全页长图" />
+          <a class="status-pill" href="report-brazil-oral-2026-07.html" target="_blank" rel="noopener">HTML 报告 · 点此浏览巴西 7 月完整版 ↗</a>
+          <div class="screenshot">
+            <img src="images/report_pricing.png" alt="05 定价区间板块" />
+          </div>
+          <div class="screenshot">
+            <img src="images/report_hot.png" alt="07 销量环比上升：高潜单品 Top10" />
           </div>
         </article>
       </div>
@@ -485,14 +504,14 @@
           <div class="card-header">
             <div class="card-badge">3</div>
             <div>
-              <h3>分类结构 → 找洼地</h3>
+              <h3>分类结构：销量在哪，机会在哪</h3>
               <p class="sub">把 500 个 SKU 拆到 13 个平台分类里看</p>
             </div>
           </div>
           <ul>
             <li><strong>销量 / SKU 双口径：</strong>手动牙刷销量占 30.5%（128 个 SKU 平价走量）；牙膏仅 71 个 SKU 却贡献 22.6% 销量，集中度高于牙刷</li>
             <li><strong>功能拿捏卖点：</strong>羟基磷灰石、益生菌、紫管美白是溢价关键词</li>
-            <li><strong>长尾识别：</strong>牙齿矫正 13.4% 销量成高坪效小众类目，舌苔清洁等长尾自群坪效偏低</li>
+            <li><strong>长尾类目</strong>（行业词，指销量占比小但有稳定销量的冷门类目）：牙齿矫正以 13.4% 销量成为产出比最高的小众类目；舌苔清洁等类目产出比偏低，投注需谨慎</li>
           </ul>
           <div class="finding"><strong>结构结论：</strong>平价走量带在手动牙刷，溢价机会在牙膏美白与成分升级 —— 下一步投什么，结构先告诉你</div>
           <div class="screenshot">
@@ -541,12 +560,12 @@
 
     <hr class="divider" />
 
-    <!-- 03 六份成套 -->
+    <!-- 03 可复用流程 -->
     <section class="case" id="multi">
       <div class="case-head">
-        <div class="case-index">03 · 六份成套</div>
-        <h2>同一套方法，三个市场 × 两个类目</h2>
-        <p>美区 / 墨区 / 巴西 × 口腔 / 保健，流程跑通一个市场后，其余五个只是换数据</p>
+        <div class="case-index">03 · 可复用流程</div>
+        <h2>不止六份：任何市场、类目、时间维度都能跑</h2>
+        <p>六份报告只是当前产出 —— 流程本身可复用：换市场、换类目、把月榜周榜拉长到季度，都能按同一口径做市场格局分析，支撑对市场的了解和新品挖掘</p>
       </div>
 
       <div class="cards">
@@ -554,7 +573,7 @@
           <div class="card-header">
             <div class="card-badge">6</div>
             <div>
-              <h3>六份报告封面</h3>
+              <h3>已产出：六份报告</h3>
               <p class="sub">同一版式，不同市场</p>
             </div>
           </div>
@@ -580,6 +599,23 @@
           <div class="screenshot">
             <img src="images/research_list.png" alt="FastMoss 调研表格清单" />
           </div>
+        </article>
+
+        <article class="card">
+          <div class="card-header">
+            <div class="card-badge">8</div>
+            <div>
+              <h3>还能怎么延展</h3>
+              <p class="sub">流程是资产，数据只是输入</p>
+            </div>
+          </div>
+          <ul>
+            <li><strong>换市场：</strong>美区 / 墨区 / 巴西之外，任何 FastMoss 覆盖的国家都能跑同一流程</li>
+            <li><strong>换类目：</strong>口腔、保健之外，同口径可扩展到其他类目，模板不用重写</li>
+            <li><strong>拉时间：</strong>月榜 × 周榜交叉之外，相邻月份与季度数据可拼出长线趋势</li>
+            <li><strong>用途：</strong>市场格局了解 + 新品挖掘方向，结论直接服务选品与素材方向</li>
+          </ul>
+          <span class="status-pill">持续可用</span>
         </article>
       </div>
     </section>
